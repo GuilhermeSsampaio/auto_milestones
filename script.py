@@ -1,6 +1,8 @@
 import os
 from github import Github, GithubException
-
+import json
+from dotenv import load_dotenv
+load_dotenv()
 # --- Configurações ---
 # Substitua 'SEU_GITHUB_TOKEN' pelo seu Personal Access Token do GitHub.
 # É altamente recomendável carregar isso de variáveis de ambiente para segurança.
@@ -8,31 +10,18 @@ from github import Github, GithubException
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN", "SEU_GITHUB_TOKEN")
 
 # Substitua 'SEU_USUARIO_OU_ORGANIZACAO' pelo nome de usuário ou organização do repositório.
-REPO_OWNER = "your-username-or-organization"
+# REPO_OWNER = "your-username-or-organization"
+REPO_OWNER = os.getenv("REPO_OWNER", "SEU_USUARIO_OU_ORGANIZACAO")
 # Substitua 'SEU_NOME_DO_REPOSITORIO' pelo nome do seu repositório.
-REPO_NAME = "your-repo-name"
+REPO_NAME = os.getenv("REPO_NAME", "SEU_NOME_DO_REPOSITORIO")
 
 # --- Definição das Milestones e Issues (Baseado no seu Plano de Trabalho) ---
 # Estrutura: { "Nome da Milestone": ["Issue 1", "Issue 2", ...] }
 # Você pode adicionar mais detalhes para as issues aqui se quiser,
 # como descrições ou labels, mas para simplicidade, estamos usando apenas o título.
-PROJECT_PLAN = {
-    "Milestone 1: Estruturação Inicial": {
-        "Issue #1: Configuração do projeto e ambiente": [
-            "Criar estrutura de diretórios (backend/, interface/, cli/, models/, routes/, tests/).",
-            "Configurar Dockerfile e docker-compose.",
-            "Adicionar requirements.txt inicial.",
-            "Configurar .gitignore e README.md."
-        ],
-        "Issue #2: Setup de testes com Pytest e Hypothesis": [
-            "Configurar pytest.ini.",
-            "Criar primeiros testes de exemplo (tests/test_sanity.py).",
-            "Validar execução dos testes no Docker."
-        ]
-    },
-   
-    
-}
+with open('project_plan.json', 'r') as f:
+    PROJECT_PLAN = json.load(f)
+
 
 def create_github_milestones_and_issues():
     """

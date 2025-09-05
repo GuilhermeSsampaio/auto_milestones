@@ -1,0 +1,19 @@
+{
+  "Milestone 1: Inicialização": {
+    "Issue #1: Estrutura do projeto": [
+      "Criar diretórios principais.",
+      "Configurar README.md."
+    ],
+    "Issue #2: Ambiente de desenvolvimento": [
+      "Configurar Docker.",
+      "Adicionar requirements.txt."
+    ]
+  },
+  "Milestone 2: Testes e Integração": {
+    "Issue #1: Setup de testes": ["Configurar pytest.", "Criar teste inicial."],
+    "Issue #2: Integração contínua": [
+      "Configurar workflow do GitHub Actions.",
+      "Validar execução dos testes."
+    ]
+  }
+}
